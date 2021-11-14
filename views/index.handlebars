@@ -1,0 +1,74 @@
+<h2 class='text-center'>Welcome to SOS Parish Database</h2>
+<h3 class='text-center'>Parishner Search</h3>
+{{#if showForm}}
+  <form
+    style='width: 290px;margin:auto;margin-top:50px;'
+    method='POST'
+    action='/'
+  >
+    <div class='form-group'>
+      <label for='name'>Name</label>
+      <input
+        required='true'
+        minlength="3"
+        type='text'
+        class='form-control'
+        name='name'
+        id='name'
+        aria-describedby='nameHelp'
+        placeholder='Enter name'
+      />
+    </div>
+    <div class='form-group'>
+      <label for='phone'>Phone Number</label>
+      <input
+        type='text'
+        name='phone'
+        class='form-control'
+        id='phone'
+        placeholder='Optional'
+      />
+    </div>
+    <div class='form-check'>
+      <button
+        type='submit'
+        name='search'
+        id='search'
+        onclick='displayPhrase()'
+        class='btn btn-primary'
+      >Search</button>
+    </div>
+  </form>
+{{/if}}
+
+{{#if showTableRes}}
+  {{#unless results}}
+    <p class='text-center' style='margin-top:50px;'>Your search does not match
+      any of our records.</p>
+    <p class='text-center'>Kindly contact the IT Administrator or
+      <a href='/'>change your search input</a></p>
+  {{/unless}}
+{{/if}}
+
+{{#if results}}
+  <p class='text-center' style='margin-top:30px;'><a
+      href='/'
+      class='btn btn-sm btn-primary'
+    >Go back</a></p>
+  <table class='table table-striped'>
+    <thead>
+      <tr>
+        <th scope='col'>Full Name</th>
+        <th scope='col'>Phone</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each results}}
+        <tr>
+          <td>{{this.name}}</td>
+          <td>{{this.phone}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{/if}}
